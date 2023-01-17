@@ -136,16 +136,16 @@ columnSeries.columns.template.setAll({
   cornerRadiusTR: 5,
   fill: function(dataItem) {
     if (dataItem.dataContext.value2 > 0) {
-      return am5.color("0x095256");
+      return am5.color("#00ff00");
     } else {
-      return am5.color("#C95256");
+      return am5.color("#FF0000");
     }
   },
   stroke: function(dataItem) {
     if (dataItem.dataContext.value2 > 0) {
-      return am5.color("0x095256");
+      return am5.color("#00ff00");
     } else {
-      return am5.color("#C95256");
+      return am5.color("#FF0000");
     }
   }
 });
