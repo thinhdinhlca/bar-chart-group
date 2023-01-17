@@ -138,8 +138,8 @@ columnSeries.columns.template.setAll({
   cornerRadiusTR: 5
 });
 
-chartSeries.data.setAll(data);
-chartSeries.appear(1000);
+columnSeries.data.setAll(data);
+columnSeries.appear(1000);
 
 // Add scrollbar
 // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
