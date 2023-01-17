@@ -130,7 +130,7 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
   })
 }));
 
-series.columns.template.adapters.add("fill", function(fill, target) {
+columnSeries.columns.template.adapters.add("fill", function(fill, target) {
   if (target.dataItem.get("valueY") < 0) {
     return am5.color(0xff621f);
   }
