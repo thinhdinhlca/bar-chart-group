@@ -123,7 +123,7 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
   yAxis: yAxis,
   valueYField: "value2",
   categoryXField: "time",
-  fill: am5.color("#5a5")
+  fill: am5.color("#5a5"),
   tooltip: am5.Tooltip.new(root, {
     labelText: "{valueY}",
     dy:-10
@@ -138,7 +138,7 @@ columnSeries.columns.template.setAll({
 });
 
 columnSeries.adapter.add("fill", function(fill, target) {
-  if (target.dataItem.valueY < 0) {
+  if (target.dataItem && (target.dataItem.valueY < 0)) {
     return am4core.color("#a55");
   }
   else {
