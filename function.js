@@ -124,6 +124,7 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
   valueYField: "value2",
   categoryXField: "time",
   fill: am5.color("#023020"),
+  stroke: am5.color("#023020"),
   tooltip: am5.Tooltip.new(root, {
     labelText: "{valueY}",
     dy:-10
@@ -132,10 +133,19 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
 
 columnSeries.columns.template.adapters.add("fill", function(fill, target) {
   if (target.dataItem.get("valueY") < 0) {
-    return am5.color(0xff621f);
+    return am5.color("#8B0000");
   }
   else {
     return fill;
+  }
+});
+
+columnSeries.columns.template.adapters.add("stroke", function(stroke, target) {
+  if (target.dataItem.get("valueY") < 0) {
+    return am5.color("#8B0000");
+  }
+  else {
+    return stroke;
   }
 });
 
