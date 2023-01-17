@@ -84,7 +84,7 @@ var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
   renderer: am5xy.AxisRendererY.new(root, {})
 }));
 
-var series = chart.series.push(am5xy.LineSeries.new(root, {
+var areaSeries = chart.series.push(am5xy.LineSeries.new(root, {
   xAxis: xAxis,
   yAxis: yAxis,
   valueYField: "value",
@@ -95,19 +95,18 @@ var series = chart.series.push(am5xy.LineSeries.new(root, {
   })
 }));
 
-series.strokes.template.setAll({
+areaSeries.strokes.template.setAll({
   templateField: "strokeSettings",
   strokeWidth: 2
 });
 
-series.fills.template.setAll({
+areaSeries.fills.template.setAll({
   visible: true,
   fillOpacity: 0.5,
   templateField: "fillSettings"
 });
 
-
-series.bullets.push(function() {
+areaSeries.bullets.push(function() {
   return am5.Bullet.new(root, {
     sprite: am5.Circle.new(root, {
       templateField: "bulletSettings",
@@ -116,8 +115,28 @@ series.bullets.push(function() {
   });
 });
 
-series.data.setAll(data);
-series.appear(1000);
+areaSeries.data.setAll(data);
+areaSeries.appear(1000);
+
+var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
+  xAxis: xAxis,
+  yAxis: yAxis,
+  valueYField: "value2",
+  categoryXField: "time",
+  fill: am5.color(0x095256),
+  stroke: am5.color(0x095256),
+  tooltip: am5.Tooltip.new(root, {
+    labelText: "{valueY}",
+    dy:-10
+  })
+}));
+
+columnSeries.columns.template.setAll({
+  fillOpacity: 0.5,
+  strokeWidth: 2,
+  cornerRadiusTL: 5,
+  cornerRadiusTR: 5
+});
 
 // Add scrollbar
 // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
