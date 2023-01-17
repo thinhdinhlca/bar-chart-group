@@ -135,14 +135,14 @@ columnSeries.columns.template.setAll({
   cornerRadiusTL: 5,
   cornerRadiusTR: 5,
   fill: function(dataItem) {
-    if (dataItem.valueY > 0) {
+    if (dataItem.dataContext.valueY > 0) {
       return am5.color("#00ff00");
     } else {
       return am5.color("#FF0000");
     }
   },
   stroke: function(dataItem) {
-    if (dataItem.valueY > 0) {
+    if (dataItem.dataContext.valueY > 0) {
       return am5.color("#00ff00");
     } else {
       return am5.color("#FF0000");
