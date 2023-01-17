@@ -125,12 +125,18 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
   categoryXField: "time",
   fill: function(dataItem) {
     if (dataItem.dataContext.value2 > 0) {
-      return am5.color("green");
+      return am5.color("0x095256");
     } else {
       return am5.color("red");
     }
   },
-  stroke: am5.color(0x095256),
+  stroke: function(dataItem) {
+    if (dataItem.dataContext.value2 > 0) {
+      return am5.color("0x095256");
+    } else {
+      return am5.color("red");
+    }
+  },
   tooltip: am5.Tooltip.new(root, {
     labelText: "{valueY}",
     dy:-10
