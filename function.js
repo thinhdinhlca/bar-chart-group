@@ -137,15 +137,6 @@ columnSeries.columns.template.setAll({
   cornerRadiusTR: 5
 });
 
-columnSeries.adapter.add("fill", function(fill, target) {
-  if (target.dataItem && (target.dataItem.valueY < 0)) {
-    return am4core.color("#a55");
-  }
-  else {
-    return fill;
-  }
-});
-
 columnSeries.data.setAll(data);
 columnSeries.appear(1000);
 
