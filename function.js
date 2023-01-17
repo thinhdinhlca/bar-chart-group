@@ -130,6 +130,15 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
   })
 }));
 
+columnSeries.adapter.add("fill", function(fill, target) {
+  if (target.dataItem && (target.dataItem.valueY < 0)) {
+    return am5core.color("#8b0000");
+  }
+  else {
+    return fill;
+  }
+});
+
 columnSeries.columns.template.setAll({
   fillOpacity: 0.5,
   strokeWidth: 2,
