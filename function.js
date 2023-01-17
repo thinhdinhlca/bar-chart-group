@@ -134,9 +134,15 @@ columnSeries.columns.template.setAll({
   strokeWidth: 2,
   cornerRadiusTL: 5,
   cornerRadiusTR: 5,
-  fill: value2>0 ? "rgba(0,255,0,0.5)" : "rgba(255,0,0,0.5)",
+  fill: function(dataItem) {
+    if (target.dataItem.valueY > 0) {
+      return am5.color("#00ff00");
+    } else {
+      return am5.color("#FF0000");
+    }
+  },
   stroke: function(dataItem) {
-    if (dataItem.dataContext.valueY > 0) {
+    if (target.dataItem.valueY > 0) {
       return am5.color("#00ff00");
     } else {
       return am5.color("#FF0000");
