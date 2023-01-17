@@ -150,7 +150,7 @@ columnSeries.columns.template.adapters.add("stroke", function(stroke, target) {
 });
 
 columnSeries.columns.template.setAll({
-  fillOpacity: 0.5,
+  fillOpacity: 1,
   strokeWidth: 2,
   cornerRadiusTL: 5,
   cornerRadiusTR: 5
