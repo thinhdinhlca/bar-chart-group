@@ -138,7 +138,7 @@ columnSeries.columns.template.setAll({
 });
 
 columnSeries.adapter.add("fill", function(fill, target) {
-  if (target.dataItem && (target.dataItem.valueY < 0)) {
+  if (target.dataItem.valueY < 0) {
     return am4core.color("#a55");
   }
   else {
