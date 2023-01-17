@@ -123,7 +123,7 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
   yAxis: yAxis,
   valueYField: "value2",
   categoryXField: "time",
-  fill: am5.color("#59A80F"),
+  fill: am5.color("#023020"),
   tooltip: am5.Tooltip.new(root, {
     labelText: "{valueY}",
     dy:-10
