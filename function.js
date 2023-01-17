@@ -127,14 +127,14 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
     if (dataItem.dataContext.value2 > 0) {
       return am5.color("0x095256");
     } else {
-      return am5.color("red");
+      return am5.color("#C95256");
     }
   },
   stroke: function(dataItem) {
     if (dataItem.dataContext.value2 > 0) {
       return am5.color("0x095256");
     } else {
-      return am5.color("red");
+      return am5.color("#C95256");
     }
   },
   tooltip: am5.Tooltip.new(root, {
