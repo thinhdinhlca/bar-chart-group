@@ -118,9 +118,6 @@ areaSeries.bullets.push(function() {
 areaSeries.data.setAll(data);
 areaSeries.appear(1000);
 
-chartSeries.data.setAll(data);
-chartSeries.appear(1000);
-
 var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
   xAxis: xAxis,
   yAxis: yAxis,
@@ -140,6 +137,9 @@ columnSeries.columns.template.setAll({
   cornerRadiusTL: 5,
   cornerRadiusTR: 5
 });
+
+chartSeries.data.setAll(data);
+chartSeries.appear(1000);
 
 // Add scrollbar
 // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
