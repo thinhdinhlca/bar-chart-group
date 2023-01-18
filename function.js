@@ -126,8 +126,7 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
       text: "My Y Axis Title",
       align: "middle",
       rotation: 0
-    },
-    // other axis options
+    }
   },
   valueYField: "value2",
   categoryXField: "time",
