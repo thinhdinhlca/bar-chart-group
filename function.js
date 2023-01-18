@@ -121,13 +121,7 @@ areaSeries.appear(1000);
 
 var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
   xAxis: xAxis,
-  yAxis: {
-    title: {
-      text: "My Y Axis Title",
-      align: "middle",
-      rotation: 0
-    }
-  },
+  yAxis: yAxis,
   valueYField: "value2",
   categoryXField: "time",
   fill: am5.color("#023020"),
