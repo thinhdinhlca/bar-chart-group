@@ -132,6 +132,15 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
   })
 }));
 
+chart.xAxes.push({
+  title: {
+    text: "My X Axis Title",
+    align: "middle",
+    rotation: 90
+  },
+  // other axis options
+});
+
 columnSeries.columns.template.adapters.add("fill", function(fill, target) {
   if (target.dataItem.get("valueY") < 0) {
     return am5.color("#8B0000");
@@ -159,25 +168,6 @@ columnSeries.columns.template.setAll({
 
 columnSeries.data.setAll(data);
 columnSeries.appear(1000);
-
-xAxis.children.unshift(
-  am5.Label.new(root, {
-    text: "Time of Day",
-    x: am5.p50,
-    centerX: am5.percent(50),
-    centerY: true,
-    paddingBottom: -100
-  })
-);
-
-yAxis.children.unshift(
-  am5.Label.new(root, {
-    rotation: -90,
-    text: "Average SPX Points",
-    y: am5.p50,
-    centerX: am5.p50
-  })
-);
 
 // Add scrollbar
 // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
