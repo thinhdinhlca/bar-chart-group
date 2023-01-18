@@ -121,7 +121,14 @@ areaSeries.appear(1000);
 
 var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
   xAxis: xAxis,
-  yAxis: yAxis,
+  yAxis: {
+    title: {
+      text: "My Y Axis Title",
+      align: "middle",
+      rotation: 0
+    },
+    // other axis options
+  },
   valueYField: "value2",
   categoryXField: "time",
   fill: am5.color("#023020"),
@@ -131,15 +138,6 @@ var columnSeries = chart.series.push(am5xy.ColumnSeries.new(root, {
     dy:-10
   })
 }));
-
-chart.xAxes.push({
-  title: {
-    text: "My X Axis Title",
-    align: "middle",
-    rotation: 90
-  },
-  // other axis options
-});
 
 columnSeries.columns.template.adapters.add("fill", function(fill, target) {
   if (target.dataItem.get("valueY") < 0) {
