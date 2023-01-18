@@ -160,6 +160,25 @@ columnSeries.columns.template.setAll({
 columnSeries.data.setAll(data);
 columnSeries.appear(1000);
 
+xAxis.children.push(
+  am5.Label.new(root, {
+    text: "Time of Day",
+    x: am5.p50,
+    centerX: am5.percent(50),
+    centerY: true,
+    paddingBottom: -100
+  })
+);
+
+yAxis.children.unshift(
+  am5.Label.new(root, {
+    rotation: -90,
+    text: "Average SPX Points",
+    y: am5.p50,
+    centerX: am5.p50
+  })
+);
+
 // Add scrollbar
 // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
 chart.set("scrollbarX", am5.Scrollbar.new(root, {
