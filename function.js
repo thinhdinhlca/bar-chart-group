@@ -159,14 +159,13 @@ columnSeries.columns.template.setAll({
 columnSeries.data.setAll(data);
 columnSeries.appear(1000);
 
-var xAxisLabel = am5.Label.new(root, {
-  text: "Time of day",
-  y: height + 20,
-  centerX: am5.p50
-});
-
-xAxis.children.unshift(xAxisLabel);
-xAxis.paddingBottom = 20;
+xAxis.children.unshift(
+  am5.Label.new(root, {
+    text: "Time of Day",
+    x: am5.p50,
+    centerY: true
+  })
+);
 
 yAxis.children.unshift(
   am5.Label.new(root, {
