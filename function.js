@@ -163,9 +163,8 @@ xAxis.children.unshift(
   am5.Label.new(root, {
     text: "Time of Day",
     x: am5.p50,
-    centerY: true,
-    dx: 0,
-    dy: 40
+    y: height-20,
+    dx: 0
   })
 );
 
