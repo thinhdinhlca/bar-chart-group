@@ -166,7 +166,7 @@ xAxis.children.unshift(
     x: am5.p50,
     centerX: am5.percent(50),
     centerY: true,
-    paddingBottom: -60
+    paddingBottom: -100
   })
 );
 
