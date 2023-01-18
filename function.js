@@ -162,8 +162,10 @@ columnSeries.appear(1000);
 xAxis.children.unshift(
   am5.Label.new(root, {
     text: "Time of Day",
-    y: am5.p100,
-    centerX: am5.p50
+    x: am5.p50,
+    centerY: true,
+    dx: 0,
+    dy: 15C
   })
 );
 
