@@ -165,8 +165,7 @@ xAxis.children.push(
     text: "Time of Day",
     x: am5.p50,
     centerX: am5.percent(50),
-    centerY: true,
-    paddingBottom: -100
+    centerY: true
   })
 );
 
