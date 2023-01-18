@@ -159,13 +159,8 @@ columnSeries.columns.template.setAll({
 columnSeries.data.setAll(data);
 columnSeries.appear(1000);
 
-var yRenderer = yAxis.renderer;
-yRenderer.title.text = "SPX Points";
-yRenderer.title.fontSize = 14;
-
-var xRenderer = xAxis.renderer;
-xRenderer.title.text = "Time of day";
-xRenderer.title.fontSize = 14;
+xAxis.title.set("text", "Time of day");
+yAxis.title.set("text", "SPX Points");
 
 // Add scrollbar
 // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
