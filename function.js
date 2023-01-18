@@ -159,8 +159,22 @@ columnSeries.columns.template.setAll({
 columnSeries.data.setAll(data);
 columnSeries.appear(1000);
 
-xAxis.title.set("text", "Time of day");
-yAxis.title.set("text", "SPX Points");
+xAxis.children.unshift(
+  am5.Label.new(root, {
+    text: "Time of Day",
+    y: am5.p100,
+    centerX: am5.p50
+  })
+);
+
+yAxis.children.unshift(
+  am5.Label.new(root, {
+    rotation: -90,
+    text: "Average SPX Points",
+    y: am5.p50,
+    centerX: am5.p50
+  })
+);
 
 // Add scrollbar
 // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
