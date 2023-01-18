@@ -165,7 +165,7 @@ xAxis.children.unshift(
     x: am5.p50,
     centerY: true,
     dx: 0,
-    dy: -20
+    dy: 40
   })
 );
 
