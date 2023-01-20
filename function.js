@@ -55,7 +55,7 @@ var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
 }));
 cursor.lineY.set("visible", false);
 
-var colorSet = var colorSet = am5.ColorSet.new(root, {colors: ["#F5A623", "#F5A623", "#4285F4", "#4285F4", "#EA4335", "#EA4335", "#34A853", "#34A853", "#FBBC04", "#FBBC04"]});
+var colorSet = am5.ColorSet.new(root, {colors: ["#F5A623", "#F5A623", "#4285F4", "#4285F4", "#EA4335", "#EA4335", "#34A853", "#34A853", "#FBBC04", "#FBBC04"]});
 
 //   *** The data ***
 var data = [ ${data} ];
