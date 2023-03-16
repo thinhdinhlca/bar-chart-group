@@ -109,7 +109,6 @@ window.function = function (data, width, height) {
             }
           },
           plugins: {
-            compassBackground: true,
             legend: {
               labels: {
                 color: textColor,
