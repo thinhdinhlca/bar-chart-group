@@ -27,6 +27,7 @@ window.function = function (data, width, height) {
       document.addEventListener('DOMContentLoaded', function () {
         const ctx = document.getElementById('myRadarChart').getContext('2d');
         const textColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'white' : 'black';
+        const pointLabelFontSize = window.innerWidth <= 768 ? 12 : 13;
 
         const data = {
           labels: [
@@ -66,11 +67,11 @@ window.function = function (data, width, height) {
                 circular: true
               },
               pointLabels: {
-                color: textColor,
+                color: pointLabelFontSize,
                 font: {
                   size: 13
                 },
-              padding: 10
+              padding: 15
               },
               ticks: {
                 color: textColor,
