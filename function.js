@@ -20,14 +20,14 @@ window.function = function (data, width, height) {
         
         const data = {
           labels: [
-            'Inner & Outer Self',
+            'Sprit & Higher Self',
             'Home & Family',
+            'Inner & Outer Self',
+            'Wealth, Work & Study',
+            'Nature & Environment',
             'Community',
             'World',
-            'Spirit & Higher Self',
-            'Beliefs & Practices',
-            'Nature & Environment',
-            'Wealth Work & Study'
+            'Beliefs & Practices'
           ],
           datasets: [
             {
