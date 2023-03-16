@@ -52,7 +52,8 @@ window.function = function (data, width, height) {
             r: {
               beginAtZero: true,
               grid: {
-                color: 'rgba(255, 255, 255, 0.5)',
+                color: 'rgba(255, 255, 255, 0)',
+                circular: true
               },
               pointLabels: {
                 color: 'white',
@@ -60,6 +61,9 @@ window.function = function (data, width, height) {
               ticks: {
                 color: 'white',
                 backdropColor: 'transparent',
+                min: 0,
+                max: 50,
+                stepSize: 50
               },
             }
           },
@@ -67,6 +71,14 @@ window.function = function (data, width, height) {
             legend: {
               labels: {
                 color: 'white',
+              },
+            },
+            title: {
+              display: true,
+              text: 'The Ayo Index - Self Assessment',
+              color: 'white',
+              font: {
+                size: 24,
               },
             },
           },
