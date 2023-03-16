@@ -67,13 +67,16 @@ window.function = function (data, width, height) {
               },
               pointLabels: {
                 color: textColor,
+                font: {
+                  size: (12 * 1.1) // Increase size by 10%
+                }
               },
               ticks: {
                 color: textColor,
                 backdropColor: 'transparent',
                 min: 0,
-                max: 60,
-                stepSize: 60,
+                max: 50,
+                display: false
               },
             }
           },
