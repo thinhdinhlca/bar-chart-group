@@ -28,6 +28,32 @@ window.function = function (data, width, height) {
         const ctx = document.getElementById('myRadarChart').getContext('2d');
         const textColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'white' : 'black';
         const pointLabelFontSize = window.innerWidth <= 768 ? 12 : 13;
+        
+        // Custom plugin for compass background
+        const compassBackgroundPlugin = {
+          id: 'compassBackground',
+          beforeDraw: (chart, args, options) => {
+            const ctx = chart.ctx;
+            const chartArea = chart.chartArea;
+
+            // Load the compass image
+            const compassImage = new Image();
+            compassImage.src = 'https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/aENRxeswEVB4n6nwflYA/pub/oLJoyuL8qQZ67B4y2AjO.png'; // Set the image source URL
+
+            // Draw the compass image on the canvas
+            compassImage.onload = () => {
+              const imageWidth = chartArea.right - chartArea.left;
+              const imageHeight = chartArea.bottom - chartArea.top;
+              const imageX = chartArea.left;
+              const imageY = chartArea.top;
+
+              ctx.drawImage(compassImage, imageX, imageY, imageWidth, imageHeight);
+            };
+          },
+        };
+
+        // Register the custom plugin with Chart.js
+        Chart.register(compassBackgroundPlugin);
 
         const data = {
           labels: [
@@ -83,6 +109,7 @@ window.function = function (data, width, height) {
             }
           },
           plugins: {
+            compassBackground: true,
             legend: {
               labels: {
                 color: textColor,
