@@ -67,9 +67,9 @@ window.function = function (data, width, height) {
                 circular: true
               },
               pointLabels: {
-                color: pointLabelFontSize,
+                color: textColor,
                 font: {
-                  size: 13
+                  size: pointLabelFontSize
                 },
               padding: 15
               },
