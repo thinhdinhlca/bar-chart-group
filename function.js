@@ -43,8 +43,8 @@ window.function = function (data, width, height) {
             {
               label: "Today's Touchpoint",
               data: [${data}],
-              backgroundColor: 'rgba(0, 150, 136, 0)',
-              borderColor: '#009688',
+              backgroundColor: 'rgba(255, 215, 0, 0)',
+              borderColor: '#FFD700',
               borderWidth: 2
             },
             {
@@ -73,7 +73,7 @@ window.function = function (data, width, height) {
                 backdropColor: 'transparent',
                 min: 0,
                 max: 60,
-                stepSize: 50,
+                stepSize: 60,
               },
             }
           },
