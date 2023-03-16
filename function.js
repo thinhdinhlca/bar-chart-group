@@ -14,7 +14,6 @@ window.function = function (data, width, height) {
   </head>
   <body>
     <canvas id="myRadarChart" width="${width}%" height="${height}px"></canvas>
-
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const ctx = document.getElementById('myRadarChart').getContext('2d');
@@ -32,8 +31,15 @@ window.function = function (data, width, height) {
           ],
           datasets: [
             {
-              label: 'My Data',
+              label: "Today's Touchpoint",
               data: [${data}],
+              backgroundColor: 'rgba(0, 150, 136, 0.2)',
+              borderColor: '#009688',
+              borderWidth: 2
+            },
+            {
+              label: 'Opportunity for Expansion',
+              data: [50, 50, 50, 50, 50, 50, 50, 50],
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 2
@@ -44,9 +50,27 @@ window.function = function (data, width, height) {
         const options = {
           scales: {
             r: {
-              beginAtZero: true
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.5)',
+              },
+              pointLabels: {
+                color: 'white',
+              },
+              ticks: {
+                color: 'white',
+                backdropColor: 'transparent',
+              },
             }
-          }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'white',
+              },
+            },
+          },
+          backgroundColor: 'white'
         };
         
         const myRadarChart = new Chart(ctx, {
