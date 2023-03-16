@@ -11,16 +11,26 @@ window.function = function (data, width, height) {
     <meta charset="utf-8">
     <title>Radar Chart with Chart.js</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+    </style>
   </head>
   <body>
     <canvas id="myRadarChart" width="${width}%" height="${height}px"></canvas>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const ctx = document.getElementById('myRadarChart').getContext('2d');
-        
+        const textColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'white' : 'black';
+
         const data = {
           labels: [
-            'Sprit & Higher Self',
+            'Spirit & Higher Self',
             'Home & Family',
             'Inner & Outer Self',
             'Wealth, Work & Study',
@@ -33,20 +43,20 @@ window.function = function (data, width, height) {
             {
               label: "Today's Touchpoint",
               data: [${data}],
-              backgroundColor: 'rgba(0, 150, 136, 0.2)',
+              backgroundColor: 'rgba(0, 150, 136, 0)',
               borderColor: '#009688',
               borderWidth: 2
             },
             {
               label: 'Opportunity for Expansion',
               data: [50, 50, 50, 50, 50, 50, 50, 50],
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              backgroundColor: 'rgba(75, 192, 192, 0)',
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 2
             }
           ]
         };
-        
+
         const options = {
           scales: {
             r: {
@@ -56,27 +66,27 @@ window.function = function (data, width, height) {
                 circular: true
               },
               pointLabels: {
-                color: 'white',
+                color: textColor,
               },
               ticks: {
-                color: 'white',
+                color: textColor,
                 backdropColor: 'transparent',
                 min: 0,
-                max: 50,
-                stepSize: 50
+                max: 60,
+                stepSize: 50,
               },
             }
           },
           plugins: {
             legend: {
               labels: {
-                color: 'white',
+                color: textColor,
               },
             },
             title: {
               display: true,
               text: 'The Ayo Index - Self Assessment',
-              color: 'white',
+              color: textColor,
               font: {
                 size: 24,
               },
@@ -84,7 +94,7 @@ window.function = function (data, width, height) {
           },
           backgroundColor: 'white'
         };
-        
+
         const myRadarChart = new Chart(ctx, {
           type: 'radar',
           data: data,
