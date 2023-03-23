@@ -50,10 +50,15 @@ window.function = function (data, width, height) {
             },
             {
               label: 'Opportunity for Expansion',
-              data: [50, 50, 50, 50, 50, 50, 50, 50],
+              data: [32, 32, 32, 32, 32, 32, 32, 32],
               backgroundColor: 'rgba(75, 192, 192, 0)',
               borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 2
+              borderWidth: 2,
+              borderDash: [5, 5],
+              pointRadius: 0,
+              pointHitRadius: 0,
+              pointHoverRadius: 0,
+              pointHoverBorderWidth: 0
             }
           ]
         };
