@@ -36,7 +36,7 @@ window.function = function (data, width, height, barNames, threshold) {
           labels: ${JSON.stringify(barNameArray)},
           datasets: [
             {
-              label: "Sales Achievement Rate",
+              label: "Total Payout",
               data: [${data}],
               backgroundColor: '#4622B0',
               borderColor: '#4622B0',
@@ -88,7 +88,7 @@ window.function = function (data, width, height, barNames, threshold) {
                 label: function(context) {
                   let label = context.dataset.label || '';
                   if (context.parsed.y !== null) {
-                    label += ': ' + context.parsed.y + '%';
+                    label += ': $' + context.parsed.y;
                   }
                   return label;
                 }
