@@ -1,12 +1,10 @@
-window.function = function (data, width, height, barNames, threshold, chartTitle) {
-
+window.function = function (data, width, height, barNames, threshold) {
   // data
   data = data.value ?? "";
   width = width.value ?? 100;
   height = height.value ?? 500;
   barNames = barNames.value ?? ""; // bar names should be comma-separated
   threshold = threshold.value ?? "100";
-  chartTitle = chartTitle.value ?? "Custom Bar Chart";
 
   // convert barNames string to array
   let barNameArray = barNames.split(',');
@@ -15,25 +13,20 @@ window.function = function (data, width, height, barNames, threshold, chartTitle
 <html>
   <head>
     <meta charset="utf-8">
-    <title>${chartTitle}</title>
+    <title>Bar Chart with Chart.js</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
         width: ${width}%;
         height: ${height}px;
         margin: 0;
       }
-      h2 {
-        margin-bottom: 20px; // optional, adjust as needed for spacing
-      }
     </style>
   </head>
   <body>
-    <h2>${chartTitle}</h2>
     <canvas id="myBarChart" width="${width}%" height="${height}px"></canvas>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
@@ -72,7 +65,6 @@ window.function = function (data, width, height, barNames, threshold, chartTitle
                 color: 'rgba(255, 255, 255, 0)'
               },
               ticks: {
-                display: true,
                 color: textColor,
                 backdropColor: 'transparent',
                 min: 0
@@ -81,15 +73,10 @@ window.function = function (data, width, height, barNames, threshold, chartTitle
           },
           plugins: {
             legend: {
-              display: false,
+              display: false
             },
             title: {
-              display: true,
-              text: '${chartTitle}',
-              color: textColor,
-              font: {
-                size: 24,
-              },
+              display: false
             },
           }
         };
