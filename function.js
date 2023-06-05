@@ -1,4 +1,4 @@
-window.function = function (data, width, height, barNames, threshold) {
+window.function = function (data, width, height, barNames, threshold, chartTitle) {
 
   // data
   data = data.value ?? "";
@@ -6,6 +6,7 @@ window.function = function (data, width, height, barNames, threshold) {
   height = height.value ?? 500;
   barNames = barNames.value ?? ""; // bar names should be comma-separated
   threshold = threshold.value ?? "100";
+  chartTitle = chartTitle.value ?? "Custom Bar Chart";
 
   // convert barNames string to array
   let barNameArray = barNames.split(',');
@@ -14,7 +15,7 @@ window.function = function (data, width, height, barNames, threshold) {
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Bar Chart with Chart.js</title>
+    <title>${chartTitle}</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
@@ -22,12 +23,13 @@ window.function = function (data, width, height, barNames, threshold) {
         justify-content: center;
         align-items: center;
         width: ${width}%;
-        height: $(height}px;
+        height: ${height}px;
         margin: 0;
       }
     </style>
   </head>
   <body>
+    <h2>${chartTitle}</h2>
     <canvas id="myBarChart" width="${width}%" height="${height}px"></canvas>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
@@ -66,6 +68,7 @@ window.function = function (data, width, height, barNames, threshold) {
                 color: 'rgba(255, 255, 255, 0)'
               },
               ticks: {
+                display: true,
                 color: textColor,
                 backdropColor: 'transparent',
                 min: 0
@@ -74,13 +77,11 @@ window.function = function (data, width, height, barNames, threshold) {
           },
           plugins: {
             legend: {
-              labels: {
-                color: textColor,
-              },
+              display: false,
             },
             title: {
               display: true,
-              text: 'Custom Bar Chart',
+              text: '${chartTitle}',
               color: textColor,
               font: {
                 size: 24,
