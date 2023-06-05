@@ -1,15 +1,22 @@
-window.function = function (data, width, height) {
+window.function = function (data, width, height, barWidth, barNames, threshold, thresholdColor) {
 
   // data
   data = data.value ?? "";
   width = width.value ?? 100;
   height = height.value ?? 500;
- 
+  barWidth = barWidth.value ?? 50;
+  barNames = barNames.value ?? ""; // bar names should be comma-separated
+  threshold = threshold.value ?? 50;
+  thresholdColor = thresholdColor.value ?? 'rgba(255, 0, 0, 0.5)'; // default red color for threshold line
+
+  // convert barNames string to array
+  let barNameArray = barNames.split(',');
+  
   let ht = `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Radar Chart with Chart.js</title>
+    <title>Bar Chart with Chart.js</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
@@ -22,68 +29,47 @@ window.function = function (data, width, height) {
     </style>
   </head>
   <body>
-    <canvas id="myRadarChart" width="${width}%" height="${height}px"></canvas>
+    <canvas id="myBarChart" width="${width}%" height="${height}px"></canvas>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        const ctx = document.getElementById('myRadarChart').getContext('2d');
+        const ctx = document.getElementById('myBarChart').getContext('2d');
         const textColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'white' : 'black';
-        const pointLabelFontSize = window.innerWidth <= 768 ? 12 : 13;
 
         const data = {
-          labels: [
-            'Spirit & Higher Self',
-            'Home & Family',
-            'Inner & Outer Self',
-            'Wealth, Work & Study',
-            'Nature & Environment',
-            'Community',
-            'World',
-            'Beliefs & Practices'
-          ],
+          labels: ${JSON.stringify(barNameArray)},
           datasets: [
             {
-              label: "Today's Touchpoint",
+              label: "Data",
               data: [${data}],
-              backgroundColor: 'rgba(255, 215, 0, 0)',
-              borderColor: '#FFD700',
-              borderWidth: 2
+              backgroundColor: '#4622B0',
+              borderColor: '#4622B0',
+              borderWidth: 1,
+              barThickness: ${barWidth}
             },
             {
-              label: 'Opportunity for Expansion',
-              data: [36, 36, 36, 36, 36, 36, 36, 36],
-              backgroundColor: 'rgba(75, 192, 192, 0)',
-              borderColor: 'rgba(75, 192, 192, 1)',
+              type: 'line',
+              label: 'Threshold',
+              data: Array(${data.split(',').length}).fill(${threshold}),
+              backgroundColor: '${thresholdColor}',
+              borderColor: '${thresholdColor}',
               borderWidth: 2,
-              borderDash: [5, 5],
-              pointRadius: 0,
-              pointHitRadius: 0,
-              pointHoverRadius: 0,
-              pointHoverBorderWidth: 0
+              fill: false,
+              pointRadius: 0
             }
           ]
         };
 
         const options = {
           scales: {
-            r: {
+            y: {
               beginAtZero: true,
               grid: {
-                color: 'rgba(255, 255, 255, 0)',
-                circular: true
-              },
-              pointLabels: {
-                color: textColor,
-                font: {
-                  size: pointLabelFontSize
-                },
-              padding: 15
+                color: 'rgba(255, 255, 255, 0)'
               },
               ticks: {
                 color: textColor,
                 backdropColor: 'transparent',
-                min: 0,
-                max: 50,
-                display: false
+                min: 0
               },
             }
           },
@@ -95,18 +81,17 @@ window.function = function (data, width, height) {
             },
             title: {
               display: true,
-              text: 'The Ayo Index - Self Assessment',
+              text: 'Custom Bar Chart',
               color: textColor,
               font: {
                 size: 24,
               },
             },
-          },
-          backgroundColor: 'white'
+          }
         };
 
-        const myRadarChart = new Chart(ctx, {
-          type: 'radar',
+        const myBarChart = new Chart(ctx, {
+          type: 'bar',
           data: data,
           options: options
         });
