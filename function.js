@@ -5,6 +5,7 @@ window.function = function (data, width, height, barNames) {
   width = width.value ?? 100;
   height = height.value ?? 500;
   barNames = barNames.value ?? ""; // bar names should be comma-separated
+  threshold = threshold.value ?? "100";
 
   // convert barNames string to array
   let barNameArray = barNames.split(',');
@@ -47,10 +48,10 @@ window.function = function (data, width, height, barNames) {
             {
               type: 'line',
               label: 'Threshold',
-              data: Array(${data.split(',').length}).fill(50),
+              data: Array(${data.split(',').length}).fill(${threshold}),
               backgroundColor: '#8B0000',
               borderColor: '#8B0000',
-              borderWidth: 2,
+              borderWidth: 4,
               fill: false,
               pointRadius: 0
             }
