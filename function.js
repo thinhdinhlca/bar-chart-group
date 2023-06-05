@@ -38,7 +38,7 @@ window.function = function (data, width, height, barNames, threshold) {
           labels: ${JSON.stringify(barNameArray)},
           datasets: [
             {
-              label: "Data",
+              label: "Sales Achievement Rate",
               data: [${data}],
               backgroundColor: '#4622B0',
               borderColor: '#4622B0',
@@ -47,7 +47,7 @@ window.function = function (data, width, height, barNames, threshold) {
             },
             {
               type: 'line',
-              label: 'Threshold',
+              label: 'Threshold: ${threshold}%',
               data: Array(${data.split(',').length}).fill(${threshold}),
               backgroundColor: '#8B0000',
               borderColor: '#8B0000',
@@ -66,6 +66,7 @@ window.function = function (data, width, height, barNames, threshold) {
                 color: 'rgba(255, 255, 255, 0)'
               },
               ticks: {
+                display: true, // this will display the y-axis labels
                 color: textColor,
                 backdropColor: 'transparent',
                 min: 0
@@ -79,6 +80,13 @@ window.function = function (data, width, height, barNames, threshold) {
             title: {
               display: false
             },
+            tooltip: {
+              callbacks: {
+                label: function(tooltipItem) {
+                  return tooltipItem.dataset.label + ': ' + tooltipItem.parsed.y + '%';
+                }
+              }
+            }
           }
         };
 
