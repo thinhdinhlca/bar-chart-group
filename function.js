@@ -20,7 +20,8 @@ window.function = function (data, width, height, barNames) {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        width: ${width}%;
+        height: $(height}px;
         margin: 0;
       }
     </style>
