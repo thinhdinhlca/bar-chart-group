@@ -1,4 +1,4 @@
-window.function = function (data, width, height, barNames) {
+window.function = function (data, width, height, barNames, threshold) {
 
   // data
   data = data.value ?? "";
