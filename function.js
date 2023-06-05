@@ -20,11 +20,15 @@ window.function = function (data, width, height, barNames, threshold, chartTitle
     <style>
       body {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         width: ${width}%;
         height: ${height}px;
         margin: 0;
+      }
+      h2 {
+        margin-bottom: 20px; // optional, adjust as needed for spacing
       }
     </style>
   </head>
