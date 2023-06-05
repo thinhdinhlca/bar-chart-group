@@ -54,7 +54,7 @@ window.function = function (data, width, height, barNames, threshold) {
               beginAtZero: true,
               ticks: {
                 display: true,
-                color: black
+                color: '#000000'
               },
               grid: {
                 color: 'rgba(255, 255, 255, 0)'
