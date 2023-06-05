@@ -17,13 +17,13 @@ window.function = function (data, width, height, barNames, threshold) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
-        width: ${width};
-        height: ${height};
+        width: ${width} !important;
+        height: ${height} !important;
         margin: 0;
       }
       #myBarChart {
-        width: 100%;
-        height: 100%;
+        width: 100% !important;
+        height: 100% !important;
       }
     </style>
   </head>
