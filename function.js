@@ -8,7 +8,7 @@ window.function = function (data, width, height, barNames, threshold) {
 
   // convert barNames string to array
   let barNameArray = barNames.split(',');
-  
+
   let ht = `<!DOCTYPE html>
 <html>
   <head>
@@ -26,12 +26,11 @@ window.function = function (data, width, height, barNames, threshold) {
     </style>
   </head>
   <body>
-    <canvas id="myBarChart" width="${width}%" height="${height}px"></canvas>
+    <canvas id="myBarChart" style="width: ${width}; height: ${height};"></canvas>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const ctx = document.getElementById('myBarChart').getContext('2d');
         const textColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'white' : 'black';
-
         const data = {
           labels: ${JSON.stringify(barNameArray)},
           datasets: [
@@ -42,24 +41,6 @@ window.function = function (data, width, height, barNames, threshold) {
               borderColor: '#4622B0',
               borderWidth: 1,
               barThickness: 50
-            },
-            {
-              type: 'line',
-              label: 'Threshold: ${threshold}%',
-              data: Array(${data.split(',').length}).fill(${threshold}),
-              backgroundColor: '#8B0000',
-              borderColor: '#8B0000',
-              borderWidth: 4,
-              fill: false,
-              pointRadius: 0
-            },
-            {
-              type: 'line',
-              label: 'Threshold: ${threshold}%',
-              data: Array(${data.split(',').length}).fill(${threshold}),
-              pointRadius: 0,
-              fill: false,
-              borderWidth: 0
             }
           ]
         };
@@ -97,6 +78,33 @@ window.function = function (data, width, height, barNames, threshold) {
           }
         };
 
+        var horizontalLinePlugin = {
+          afterDraw: function(chartInstance) {
+            var yScale = chartInstance.scales["y"];
+            var canvas = chartInstance.chart;
+            var ctx = canvas.ctx;
+            var yValue;
+            var style = "#8B0000";
+            var line = { y: ${threshold} };
+
+            if (line.y) {
+              yValue = yScale.getPixelForValue(line.y);
+            } else {
+              yValue = 0;
+            }
+
+            if (yValue) {
+              ctx.lineWidth = 4;
+              ctx.beginPath();
+              ctx.moveTo(0, yValue);
+              ctx.lineTo(canvas.width, yValue);
+              ctx.strokeStyle = style;
+              ctx.stroke();
+            }
+          }
+        };
+        Chart.register(horizontalLinePlugin);
+
         const myBarChart = new Chart(ctx, {
           type: 'bar',
           data: data,
@@ -109,6 +117,6 @@ window.function = function (data, width, height, barNames, threshold) {
 `;
 
   let enc = encodeURIComponent(ht);
-  let uri = `data:text/html;charset=utf-8,${enc}`
+  let uri = `data:text/html;charset=utf-8,${enc}`;
   return uri; 
 }
