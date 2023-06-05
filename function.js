@@ -70,6 +70,13 @@ window.function = function (data, width, height, barNames, threshold) {
                   yMax: ${threshold},
                   borderColor: '#8B0000',
                   borderWidth: 4,
+                  label: {
+                    enabled: true,
+                    content: 'Target: ${threshold}',
+                    position: 'start',
+                    yAdjust: -15,
+                    backgroundColor: 'rgba(255, 0, 0, 0.3)'
+                  }
                 }
               }
             },
