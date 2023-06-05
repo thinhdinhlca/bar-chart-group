@@ -96,4 +96,6 @@ window.function = function (data, width, height, barNames, threshold) {
 `
 
   let enc = encodeURIComponent(ht);
-  let uri = `data:text/html;charset=utf-8,${
+  let uri = `data:text/html;charset=utf-8,${enc}`
+  return uri; 
+}
