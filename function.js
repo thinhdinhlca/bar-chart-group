@@ -15,6 +15,7 @@ window.function = function (data, width, height, barNames, threshold) {
     <meta charset="utf-8">
     <title>Bar Chart with Chart.js</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
     <style>
       body {
         display: flex;
@@ -61,6 +62,17 @@ window.function = function (data, width, height, barNames, threshold) {
             }
           },
           plugins: {
+            annotation: {
+              annotations: {
+                line1: {
+                  type: 'line',
+                  yMin: ${threshold},
+                  yMax: ${threshold},
+                  borderColor: '#8B0000',
+                  borderWidth: 4,
+                }
+              }
+            },
             legend: {
               display: false
             },
@@ -77,33 +89,6 @@ window.function = function (data, width, height, barNames, threshold) {
             }
           }
         };
-
-        var horizontalLinePlugin = {
-          afterDraw: function(chartInstance) {
-            var yScale = chartInstance.scales["y"];
-            var canvas = chartInstance.chart;
-            var ctx = canvas.ctx;
-            var yValue;
-            var style = "#8B0000";
-            var line = { y: ${threshold} };
-
-            if (line.y) {
-              yValue = yScale.getPixelForValue(line.y);
-            } else {
-              yValue = 0;
-            }
-
-            if (yValue) {
-              ctx.lineWidth = 4;
-              ctx.beginPath();
-              ctx.moveTo(0, yValue);
-              ctx.lineTo(canvas.width, yValue);
-              ctx.strokeStyle = style;
-              ctx.stroke();
-            }
-          }
-        };
-        Chart.register(horizontalLinePlugin);
 
         const myBarChart = new Chart(ctx, {
           type: 'bar',
