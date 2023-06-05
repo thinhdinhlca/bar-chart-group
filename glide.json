@@ -28,7 +28,12 @@
       "name": "threshold",
       "displayName": "Threshold (default: 100)",
       "type": "number"
-    }
+    },
+    {
+      "name": "chartTitle",
+      "displayName": "Chart title",
+      "type": "string"
+    },=
   ],
   "result": {
     "type": "uri"
