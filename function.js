@@ -54,22 +54,30 @@ window.function = function (data, width, height, barNames, threshold) {
               borderWidth: 4,
               fill: false,
               pointRadius: 0
+            },
+            {
+              type: 'line',
+              label: 'Threshold: ${threshold}%',
+              data: Array(${data.split(',').length}).fill(${threshold}),
+              pointRadius: 0,
+              fill: false,
+              borderWidth: 0
             }
           ]
         };
 
         const options = {
+          responsive: true,
+          maintainAspectRatio: false,
           scales: {
             y: {
               beginAtZero: true,
+              ticks: {
+                display: true,
+                color: textColor
+              },
               grid: {
                 color: 'rgba(255, 255, 255, 0)'
-              },
-              ticks: {
-                display: true, // this will display the y-axis labels
-                color: textColor,
-                backdropColor: 'transparent',
-                min: 0
               },
             }
           },
@@ -77,13 +85,14 @@ window.function = function (data, width, height, barNames, threshold) {
             legend: {
               display: false
             },
-            title: {
-              display: false
-            },
             tooltip: {
               callbacks: {
-                label: function(tooltipItem) {
-                  return tooltipItem.dataset.label + ': ' + tooltipItem.parsed.y + '%';
+                label: function(context) {
+                  let label = context.dataset.label || '';
+                  if (context.parsed.y !== null) {
+                    label += ': ' + context.parsed.y + '%';
+                  }
+                  return label;
                 }
               }
             }
@@ -93,15 +102,13 @@ window.function = function (data, width, height, barNames, threshold) {
         const myBarChart = new Chart(ctx, {
           type: 'bar',
           data: data,
-          options: options,
-          responsive: true,
-          maintainAspectRatio: false
+          options: options
         });
       });
     </script>
   </body>
 </html>
-`
+`;
 
   let enc = encodeURIComponent(ht);
   let uri = `data:text/html;charset=utf-8,${enc}`
