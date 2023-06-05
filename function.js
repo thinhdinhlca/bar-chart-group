@@ -1,13 +1,10 @@
-window.function = function (data, width, height, barWidth, barNames, threshold, thresholdColor) {
+window.function = function (data, width, height, barNames) {
 
   // data
   data = data.value ?? "";
   width = width.value ?? 100;
   height = height.value ?? 500;
-  barWidth = barWidth.value ?? 50;
   barNames = barNames.value ?? ""; // bar names should be comma-separated
-  threshold = threshold.value ?? 50;
-  thresholdColor = thresholdColor.value ?? 'rgba(255, 0, 0, 0.5)'; // default red color for threshold line
 
   // convert barNames string to array
   let barNameArray = barNames.split(',');
@@ -44,14 +41,14 @@ window.function = function (data, width, height, barWidth, barNames, threshold, 
               backgroundColor: '#4622B0',
               borderColor: '#4622B0',
               borderWidth: 1,
-              barThickness: ${barWidth}
+              barThickness: 50
             },
             {
               type: 'line',
               label: 'Threshold',
-              data: Array(${data.split(',').length}).fill(${threshold}),
-              backgroundColor: '${thresholdColor}',
-              borderColor: '${thresholdColor}',
+              data: Array(${data.split(',').length}).fill(50),
+              backgroundColor: '#8B0000',
+              borderColor: '#8B0000',
               borderWidth: 2,
               fill: false,
               pointRadius: 0
