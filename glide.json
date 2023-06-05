@@ -1,8 +1,8 @@
 {
   "kind": "column",
-  "name": "amCharts chart: Line with Changing Color",
+  "name": "Custom Bar Chart",
   "description": "",
-  "author": "Gustavo A. Valero P. - LowCode Agency",
+  "author": "Thinh Dinh - LowCode Agency",
   "params": [
     {
       "name": "data",
@@ -28,11 +28,6 @@
       "name": "threshold",
       "displayName": "Threshold (default: 100)",
       "type": "number"
-    },
-    {
-      "name": "chartTitle",
-      "displayName": "Chart title",
-      "type": "string"
     }
   ],
   "result": {
