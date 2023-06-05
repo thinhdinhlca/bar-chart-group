@@ -23,6 +23,11 @@
       "name": "barNames",
       "displayName": "Bar labels",
       "type": "string"
+    },
+    {
+      "name": "threshold",
+      "displayName": "Threshold (default: 100)",
+      "type": "number"
     }
   ],
   "result": {
