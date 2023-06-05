@@ -17,18 +17,16 @@ window.function = function (data, width, height, barNames, threshold) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
-        width: ${width} !important;
-        height: ${height} !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
         margin: 0;
-      }
-      #myBarChart {
-        width: 100% !important;
-        height: 100% !important;
       }
     </style>
   </head>
   <body>
-    <canvas id="myBarChart"></canvas>
+    <canvas id="myBarChart" width="${width}%" height="${height}px"></canvas>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const ctx = document.getElementById('myBarChart').getContext('2d');
