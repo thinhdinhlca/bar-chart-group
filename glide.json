@@ -18,6 +18,11 @@
       "name": "height",
       "displayName": "Height (default: 500px)",
       "type": "number"
+    },
+    {
+      "name": "barNames",
+      "displayName": "Bar labels",
+      "type": "string"
     }
   ],
   "result": {
