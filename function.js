@@ -1,8 +1,8 @@
 window.function = function (data, width, height, barNames, threshold) {
   // data
   data = data.value ?? "";
-  width = width.value ?? 100;
-  height = height.value ?? 500;
+  width = width.value ?? "100vw";  // use viewport width units
+  height = height.value ?? "500px"; // use pixel units
   barNames = barNames.value ?? ""; // bar names should be comma-separated
   threshold = threshold.value ?? "100";
 
@@ -17,17 +17,18 @@ window.function = function (data, width, height, barNames, threshold) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: ${width}%;
-        height: ${height}px;
+        width: ${width};
+        height: ${height};
         margin: 0;
+      }
+      #myBarChart {
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
   <body>
-    <canvas id="myBarChart" width="${width}%" height="${height}px"></canvas>
+    <canvas id="myBarChart"></canvas>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const ctx = document.getElementById('myBarChart').getContext('2d');
@@ -84,7 +85,9 @@ window.function = function (data, width, height, barNames, threshold) {
         const myBarChart = new Chart(ctx, {
           type: 'bar',
           data: data,
-          options: options
+          options: options,
+          responsive: true,
+          maintainAspectRatio: false
         });
       });
     </script>
@@ -93,6 +96,4 @@ window.function = function (data, width, height, barNames, threshold) {
 `
 
   let enc = encodeURIComponent(ht);
-  let uri = `data:text/html;charset=utf-8,${enc}`
-  return uri; 
-}
+  let uri = `data:text/html;charset=utf-8,${
