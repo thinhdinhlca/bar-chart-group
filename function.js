@@ -4,7 +4,7 @@ window.function = function (data, width, height, barNames, thresholds) {
   width = width.value ?? "100vw";  // use viewport width units
   height = height.value ?? "500px"; // use pixel units
   barNames = barNames.value ?? ""; // bar names should be comma-separated
-  thresholds = thresholds.value ? thresholds.value.split(',') : []; // thresholds should be comma-separated
+  thresholds = thresholds.value ? thresholds.value.split(',').map(Number) : []; // thresholds should be comma-separated and converted to numbers
 
   // convert barNames string to array
   let barNameArray = barNames.split(',');
@@ -16,9 +16,8 @@ window.function = function (data, width, height, barNames, thresholds) {
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Bar Chart with Chart.js</title>
+    <title>Bar and Line Chart with Chart.js</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2"></script>
     <style>
       body {
         display: flex;
@@ -27,26 +26,35 @@ window.function = function (data, width, height, barNames, thresholds) {
         height: 100vh;
         margin: 0;
       }
-      #myBarChart {
+      #myChart {
         background-color: white;
       }
     </style>
   </head>
   <body>
-    <canvas id="myBarChart" style="width: ${width}; height: ${height};"></canvas>
+    <canvas id="myChart" style="width: ${width}; height: ${height};"></canvas>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        const ctx = document.getElementById('myBarChart').getContext('2d');
+        const ctx = document.getElementById('myChart').getContext('2d');
         const data = {
           labels: ${JSON.stringify(barNameArray)},
-          datasets: [
-            {
+          datasets: [{
+              type: 'bar',
               label: "Sales Achievement Rate",
               data: ${JSON.stringify(dataArray)},
               backgroundColor: '#4622B0',
               borderColor: '#4622B0',
               borderWidth: 1,
               barThickness: 20
+            },
+            {
+              type: 'line',
+              label: 'Threshold',
+              data: ${JSON.stringify(thresholds)},
+              borderColor: 'red',
+              borderWidth: 2,
+              fill: false,
+              pointRadius: 0 // remove points
             }
           ]
         };
@@ -69,19 +77,6 @@ window.function = function (data, width, height, barNames, thresholds) {
             }
           },
           plugins: {
-            annotation: {
-              annotations: thresholds.map((threshold, index) => ({
-                type: 'line',
-                mode: 'horizontal',
-                scaleID: 'y-axis-0',
-                value: Number(threshold),
-                borderColor: 'red',
-                borderWidth: 2,
-                label: {
-                  enabled: false
-                }
-              }))
-            },
             legend: {
               display: false
             },
@@ -89,6 +84,9 @@ window.function = function (data, width, height, barNames, thresholds) {
               callbacks: {
                 label: function(context) {
                   let label = context.dataset.label || '';
+                  if (label === 'Threshold') {
+                    return null; // No tooltip for the threshold line
+                  }
                   if (context.parsed.y !== null) {
                     label += ': $' + context.parsed.y.toLocaleString(); // format tooltip with dollar sign
                   }
@@ -99,8 +97,8 @@ window.function = function (data, width, height, barNames, thresholds) {
           }
         };
 
-        const myBarChart = new Chart(ctx, {
-          type: 'bar',
+        const myChart = new Chart(ctx, {
+          type: 'bar', // this is still a bar chart, but it can contain line datasets
           data: data,
           options: options
         });
