@@ -40,10 +40,11 @@ window.function = function (data, width, height, barNames, thresholds) {
           labels: ${JSON.stringify(barNameArray)},
           datasets: [{
               type: 'bar',
-              label: "Sales Achievement Rate",
+              label: "Enrolled Debt",
               data: ${JSON.stringify(dataArray)},
-              backgroundColor: '#4622B0',
-              borderColor: '#4622B0',
+              backgroundColor: '#27AAE1',
+              borderColor: '#27AAE1',
+              borderRadius: 10, // adjust for desired roundness
               borderWidth: 1,
               barThickness: 20
             },
@@ -54,7 +55,7 @@ window.function = function (data, width, height, barNames, thresholds) {
               borderColor: 'red',
               borderWidth: 2,
               fill: false,
-              pointRadius: 0 // remove points
+              pointRadius: 0 // hide points
             }
           ]
         };
