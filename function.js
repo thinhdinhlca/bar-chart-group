@@ -1,20 +1,17 @@
-window.function = function (data, width, height, barNames, threshold) {
+window.function = function (data, width, height, barNames, thresholds) {
   // data
   data = data.value ?? "";
   width = width.value ?? "100vw";  // use viewport width units
   height = height.value ?? "500px"; // use pixel units
   barNames = barNames.value ?? ""; // bar names should be comma-separated
-  threshold = threshold.value ?? ""; // Updated to accept comma-separated values
+  thresholds = thresholds.value ? thresholds.value.split(',') : []; // thresholds should be comma-separated
 
   // convert barNames string to array
   let barNameArray = barNames.split(',');
 
-  // Convert threshold string to array of numbers
-  let thresholdArray = threshold.split(',').map(val => parseFloat(val));
-
   let ht = `<!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8">
     <title>Bar Chart with Chart.js</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -39,7 +36,7 @@ window.function = function (data, width, height, barNames, threshold) {
           labels: ${JSON.stringify(barNameArray)},
           datasets: [
             {
-              label: "Total Payout",
+              label: "Sales Achievement Rate",
               data: [${data}],
               backgroundColor: '#4622B0',
               borderColor: '#4622B0',
@@ -49,6 +46,8 @@ window.function = function (data, width, height, barNames, threshold) {
           ]
         };
 
+        const thresholdData = ${JSON.stringify(thresholds)}.map(Number);
+
         const options = {
           responsive: true,
           maintainAspectRatio: false,
@@ -57,29 +56,30 @@ window.function = function (data, width, height, barNames, threshold) {
               beginAtZero: true,
               ticks: {
                 display: true,
-                color: textColor // Adjusted for theme
+                color: '#000000'
               },
               grid: {
-                color: 'rgba(255, 255, 255, 0.1)' // Slight adjustment for visibility
+                color: 'rgba(255, 255, 255, 0)'
               },
             }
           },
           plugins: {
             annotation: {
-              annotations: ${thresholdArray.map((threshold, index) => `{
+              annotations: thresholdData.map((threshold, index) => ({
                 type: 'line',
-                yMin: ${threshold},
-                yMax: ${threshold},
-                borderColor: 'rgba(139, 0, 0, ${(index + 1) / thresholdArray.length})', // Gradual color change
+                mode: 'horizontal',
+                scaleID: 'y',
+                value: threshold,
+                borderColor: '#8B0000',
                 borderWidth: 2,
                 label: {
                   enabled: true,
-                  content: 'Threshold ${index + 1}: ${threshold}',
-                  position: 'start',
-                  yAdjust: -15,
+                  content: 'Threshold: ' + threshold,
+                  position: 'end',
+                  yAdjust: -6,
                   backgroundColor: 'rgba(255, 0, 0, 0.3)'
                 }
-              }`).join(',')}
+              })),
             },
             legend: {
               display: false
@@ -89,7 +89,7 @@ window.function = function (data, width, height, barNames, threshold) {
                 label: function(context) {
                   let label = context.dataset.label || '';
                   if (context.parsed.y !== null) {
-                    label += ': $' + context.parsed.y;
+                    label += ': ' + context.parsed.y + '%';
                   }
                   return label;
                 }
