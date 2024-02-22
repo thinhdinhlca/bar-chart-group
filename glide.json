@@ -26,8 +26,8 @@
     },
     {
       "name": "threshold",
-      "displayName": "Threshold (default: 100)",
-      "type": "number"
+      "displayName": "Threshold list)",
+      "type": "string"
     }
   ],
   "result": {
