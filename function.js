@@ -4,14 +4,17 @@ window.function = function (data, width, height, barNames, threshold) {
   width = width.value ?? "100vw";  // use viewport width units
   height = height.value ?? "500px"; // use pixel units
   barNames = barNames.value ?? ""; // bar names should be comma-separated
-  threshold = threshold.value ?? "100";
+  threshold = threshold.value ?? ""; // Updated to accept comma-separated values
 
   // convert barNames string to array
   let barNameArray = barNames.split(',');
 
+  // Convert threshold string to array of numbers
+  let thresholdArray = threshold.split(',').map(val => parseFloat(val));
+
   let ht = `<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Bar Chart with Chart.js</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -54,31 +57,29 @@ window.function = function (data, width, height, barNames, threshold) {
               beginAtZero: true,
               ticks: {
                 display: true,
-                color: '#000000'
+                color: textColor // Adjusted for theme
               },
               grid: {
-                color: 'rgba(255, 255, 255, 0)'
+                color: 'rgba(255, 255, 255, 0.1)' // Slight adjustment for visibility
               },
             }
           },
           plugins: {
             annotation: {
-              annotations: {
-                line1: {
-                  type: 'line',
-                  yMin: ${threshold},
-                  yMax: ${threshold},
-                  borderColor: '#8B0000',
-                  borderWidth: 4,
-                  label: {
-                    enabled: true,
-                    content: 'Target: ${threshold}',
-                    position: 'start',
-                    yAdjust: -15,
-                    backgroundColor: 'rgba(255, 0, 0, 0.3)'
-                  }
+              annotations: ${thresholdArray.map((threshold, index) => `{
+                type: 'line',
+                yMin: ${threshold},
+                yMax: ${threshold},
+                borderColor: 'rgba(139, 0, 0, ${(index + 1) / thresholdArray.length})', // Gradual color change
+                borderWidth: 2,
+                label: {
+                  enabled: true,
+                  content: 'Threshold ${index + 1}: ${threshold}',
+                  position: 'start',
+                  yAdjust: -15,
+                  backgroundColor: 'rgba(255, 0, 0, 0.3)'
                 }
-              }
+              }`).join(',')}
             },
             legend: {
               display: false
