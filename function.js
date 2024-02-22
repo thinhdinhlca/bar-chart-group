@@ -38,24 +38,26 @@ window.function = function (data, width, height, barNames, thresholds) {
         const ctx = document.getElementById('myChart').getContext('2d');
         const data = {
           labels: ${JSON.stringify(barNameArray)},
-          datasets: [{
+          datasets: [
+            {
               type: 'bar',
               label: "Enrolled Debt",
               data: ${JSON.stringify(dataArray)},
               backgroundColor: '#27AAE1',
               borderColor: '#27AAE1',
-              borderRadius: 10, // adjust for desired roundness
+              borderRadius: 10,
               borderWidth: 1,
               barThickness: 20
             },
             {
               type: 'line',
-              label: 'Threshold',
+              label: 'Goal',
               data: ${JSON.stringify(thresholds)},
               borderColor: 'red',
               borderWidth: 2,
               fill: false,
-              pointRadius: 0 // hide points
+              pointRadius: 0,
+              spanGaps: true
             }
           ]
         };
@@ -78,18 +80,15 @@ window.function = function (data, width, height, barNames, thresholds) {
             }
           },
           plugins: {
-            legend: {
-              display: false
-            },
             tooltip: {
               callbacks: {
                 label: function(context) {
                   let label = context.dataset.label || '';
-                  if (label === 'Threshold') {
-                    return null; // No tooltip for the threshold line
+                  if (label === 'Goal') {
+                    return label + ': $' + context.parsed.y.toLocaleString(); // format tooltip for the goal line
                   }
                   if (context.parsed.y !== null) {
-                    label += ': $' + context.parsed.y.toLocaleString(); // format tooltip with dollar sign
+                    label += ': $' + context.parsed.y.toLocaleString(); // format tooltip with dollar sign for the bars
                   }
                   return label;
                 }
