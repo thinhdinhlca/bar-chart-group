@@ -1,15 +1,20 @@
 window.function = function (data, width, height, barNames) {
-  // data
+  // Default values
   data = data.value ?? "";
   width = width.value ?? "100vw";  // use viewport width units
   height = height.value ?? "500px"; // use pixel units
   barNames = barNames.value ?? ""; // bar names should be comma-separated
 
-  // convert barNames string to array
+  // Convert barNames string to array
   let barNameArray = barNames.split(',');
 
-  // parse data assuming it's an array of objects
+  // Parse data assuming it's an array of objects
   let parsedData = JSON.parse(data);
+
+  // Convert the data string to an array of numbers for each dataset
+  parsedData.forEach(dataset => {
+    dataset.data = dataset.data.split(',').map(Number);
+  });
 
   // RGB colors provided
   const rgbColors = [
@@ -22,14 +27,16 @@ window.function = function (data, width, height, barNames) {
     'rgb(71, 51, 53)'
   ];
 
+  // Create datasets using the parsed data
   let datasets = parsedData.map((item, index) => ({
     label: item.label,
     data: item.data,
     backgroundColor: rgbColors[index % rgbColors.length], // Use modulo for color cycling
     borderColor: rgbColors[index % rgbColors.length], // Use modulo for color cycling
-    borderWidth: 1
+    borderWidth: item.borderWidth
   }));
 
+  // Generate the HTML for the chart
   let chartHtml = `
     <!DOCTYPE html>
     <html>
@@ -78,7 +85,7 @@ window.function = function (data, width, height, barNames) {
               }
             };
 
-            const myChart = new Chart(ctx, {
+            new Chart(ctx, {
               type: 'bar',
               data: chartData,
               options: options
@@ -89,6 +96,7 @@ window.function = function (data, width, height, barNames) {
     </html>
   `;
 
+  // Encode the HTML to create a URI
   let encodedHtml = encodeURIComponent(chartHtml);
   let uri = `data:text/html;charset=utf-8,${encodedHtml}`;
   return uri;
