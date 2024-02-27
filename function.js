@@ -35,7 +35,9 @@ window.function = function (data, width, height, barNames) {
     borderColor: rgbColors[index % rgbColors.length], // Use modulo for color cycling
     borderWidth: 1,
     borderRadius: 10,
-    barThickness: 20
+    barThickness: 20,
+    categoryPercentage: 0.8,
+    barPercentage: 0.7
   }));
 
   // Generate the HTML for the chart
@@ -80,10 +82,6 @@ window.function = function (data, width, height, barNames) {
               responsive: true,
               maintainAspectRatio: false,
               scales: {
-                x: {
-                  categoryPercentage: 0.8,
-                  barPercentage: 0.7
-                },
                 y: {
                   beginAtZero: true,
                   ticks: {
