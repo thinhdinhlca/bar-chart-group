@@ -80,6 +80,9 @@ window.function = function (data, width, height, barNames) {
               responsive: true,
               maintainAspectRatio: false,
               scales: {
+                x: {
+                  categoryPercentage: 0.8,
+                  barPercentage: 0.7
                 y: {
                   beginAtZero: true,
                   ticks: {
