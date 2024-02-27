@@ -33,7 +33,9 @@ window.function = function (data, width, height, barNames) {
     data: item.data,
     backgroundColor: rgbColors[index % rgbColors.length], // Use modulo for color cycling
     borderColor: rgbColors[index % rgbColors.length], // Use modulo for color cycling
-    borderWidth: item.borderWidth
+    borderWidth: 1,
+    borderRadius: 10,
+    barThickness: 20
   }));
 
   // Generate the HTML for the chart
@@ -67,12 +69,24 @@ window.function = function (data, width, height, barNames) {
               datasets: ${JSON.stringify(datasets)}
             };
 
+            const formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0
+            });
+
             const options = {
               responsive: true,
               maintainAspectRatio: false,
               scales: {
                 y: {
-                  beginAtZero: true
+                  beginAtZero: true,
+                  ticks: {
+                    callback: function(value) {
+                      return formatter.format(value);
+                    }
+                  }
                 }
               },
               plugins: {
@@ -80,7 +94,19 @@ window.function = function (data, width, height, barNames) {
                   display: true
                 },
                 tooltip: {
-                  enabled: true
+                  enabled: true,
+                  callbacks: {
+                    label: function(context) {
+                      let label = context.dataset.label || '';
+                      if (label) {
+                        label += ': ';
+                      }
+                      if (context.parsed.y !== null) {
+                        label += formatter.format(context.parsed.y);
+                      }
+                      return label;
+                    }
+                  }
                 }
               }
             };
